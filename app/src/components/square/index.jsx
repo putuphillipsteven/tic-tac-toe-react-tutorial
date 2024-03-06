@@ -1,7 +1,10 @@
-export const Square = () => {
+export const Square = ({ value, onSquareClick }) => {
 	return (
-		<div className='p-2 border border-x-2'>
-			<button className='square'>1</button>
-		</div>
+		<button
+			className='square p-2 border border-x-2 w-8 h-8 border-black flex  items-center justify-center'
+			onClick={onSquareClick}
+		>
+			{value}
+		</button>
 	);
 };
