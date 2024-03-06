@@ -1,18 +1,12 @@
-import { useState } from 'react';
 import { Square } from '../square';
 import { calculateWinner } from '../../services/utils';
 
-export const Board = () => {
-	const [xIsNext, setXIsNext] = useState(true);
-
-	const [squares, setSquares] = useState(Array(9).fill(null));
-
+export const Board = ({ xIsNext, squares, onPlay }) => {
 	const handleClick = (i) => {
 		if (squares[i] || calculateWinner(squares)) return;
 		const nextSquares = squares.slice();
 		nextSquares[i] = xIsNext ? 'X' : 'O';
-		setSquares(nextSquares);
-		setXIsNext(!xIsNext);
+		onPlay(nextSquares);
 	};
 
 	const winner = calculateWinner(squares);
@@ -36,7 +30,7 @@ export const Board = () => {
 				<Square value={squares[8]} onSquareClick={() => handleClick(8)} />
 			</div>
 			<div className='text-center'>
-				<p className='font-bold'>Congratulations {winner} player!</p>
+				{winner && <p className='font-bold'>Congratulations {winner} player,</p>}
 				<p className='font-bold'>{status}</p>
 			</div>
 		</div>
